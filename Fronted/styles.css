@@ -50,6 +50,7 @@ button {
 }
 
 .product-container {
+    border-radius: 10px;
     margin: 15px;
     padding: 2px 16px;
     position: relative;
@@ -70,6 +71,11 @@ button {
     margin-left: 15px;
 
 }
+
+/* .product-container h2 {
+    text-align: center;
+
+} */
 
 .button-add{
     background-color: white;

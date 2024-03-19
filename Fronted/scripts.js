@@ -31,5 +31,6 @@ function displayProducts(productsList){
 window.onload = async() => {
     const productsList = await (await fetch("/api/products")).json();
     console.log(productsList);
+    //se llama a la funcion
     displayProducts(productsList);
 }
