@@ -1,7 +1,13 @@
 // node express, se inicializa la app con el puerto 3000
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+const port = 3000;
+
+//accedemos al body como un .json
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 //se definen los productos en el backend
 const products = [
@@ -51,11 +57,21 @@ const products = [
 
 
 app.get("/api/products", (req, res) => {
-    res.send(products)
-})
+    res.send(products);
+});
+
+app.post("/api/pay", (req, res) => {
+    const ids = req.body;
+    //obtenemos el id del producto con .find
+    ids.forEach(id => {
+        const product = products.find(p => p.id === id);
+        product.stock--;
+    });
+    res.send(products);
+});
 
 app.use("/", express.static("Fronted"));
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+    console.log(`Example app listening at http://localhost:${port}`);
+});

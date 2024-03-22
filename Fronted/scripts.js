@@ -1,16 +1,24 @@
-let products = [];
+let carrito = [];
 let total = 0;
 
-function add(product, price) {
-    console.log(product, price);
-    products.push(product);
+function add(productId, price) {
+    console.log(productId, price);
+    carrito.push(productId);
     total = total + price;
-    document.getElementById("checkout").innerHTML = `Pagar$${total}`
+    document.getElementById("checkout").innerHTML = `Pagar $${total}`
 }
 
-function pay() {
-    window.alert(products.join(", \n"));
+async function pay() {
+    const productsList = await (await fetch("/api/pay",{
+        method: "post",
+        body: JSON.stringify(carrito),
+        headers: {
+            "Content-Type": "aplication/json"
+        }
+    })).json();
 }
+
+//window.alert(products.join(", \n"));
 
 // Se remplaza index.html por ProductsList generando el mismo .html aqui 
 function displayProducts(productsList){
